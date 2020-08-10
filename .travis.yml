@@ -1,0 +1,22 @@
+sudo: required
+services:
+        - docker
+
+before_install:
+        - docker build -t swarthofole/react-test -f /home/ktb/complex/client/Dockerfile.dev /home/ktb/complex/client
+
+script:
+        - docker run -e CI=true swarthofole/react-test npm test
+
+after_succes:
+        - docker build -t swarthofole/multi-client /home/ktb/complex/client 
+        - docker build -t swarthofole/multi-nginx /home/ktb/complex/nginx
+        - docker build -t swarthofole/multi-server /home/ktb/complex/server
+        - docker build -t swarthofole/multi-worker /home/ktb/complex/worker
+        - docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
+        - docker push swarthofole/multi-client
+        - docker push swarthofole/multi-nginx
+        - docker push swarthofole/multi-server
+        - docker push swarthofole/multi-worker
+
+
