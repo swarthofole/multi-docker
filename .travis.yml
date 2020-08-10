@@ -3,7 +3,7 @@ services:
         - docker
 
 before_install:
-        - docker build -t swarthofole/react-test -f /home/ktb/complex/client/Dockerfile.dev /home/ktb/complex/client/
+        - docker build -t swarthofole/react-test -f /home/ktb/complex/client/Dockerfile.dev ./client
 
 script:
         - docker run -e CI=true swarthofole/react-test npm test
