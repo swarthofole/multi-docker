@@ -12,7 +12,7 @@ after_succes:
         - docker build -t swarthofole/multi-client ./client 
         - docker build -t swarthofole/multi-nginx ./nginx
         - docker build -t swarthofole/multi-server ./server
-        - docker build -t swarthofole/multi-worker //worker
+        - docker build -t swarthofole/multi-worker ./worker
         - echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_ID --password-stdin
         - docker push swarthofole/multi-client
         - docker push swarthofole/multi-nginx
